@@ -5,7 +5,16 @@ jobs:
   main:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Setup sparse checkout
+        uses: actions/checkout@v2
+        with:
+          path: 'my_repo'  # Optional: specify a directory name for the checked-out repository
+
+      - name: Configure sparse checkout
+        run: |
+          cd my_repo
+          git sparse-checkout init --cone
+          git sparse-checkout set scripts resource/gamedata  # Specify directories here
 
       - uses: actions/setup-node@v2
         with:
@@ -14,14 +23,12 @@ jobs:
       - name: Install dependencies
         run: npm i
 
-      # Convert XML to JSON
       - name: Convert ExternalTexts XML to JSON
-        run: node ./scripts/convertXmlToJson.js
+        run: node ./my_repo/scripts/convertXmlToJson.js  # Adjust path if necessary
 
-      # Commit changes
       - uses: EndBug/add-and-commit@v7
         with:
           default_author: github_actions
           add: |
-            ./scripts/*
-            ./resource/gamedata/*
+            ./my_repo/scripts/*
+            ./my_repo/resource/gamedata/*
