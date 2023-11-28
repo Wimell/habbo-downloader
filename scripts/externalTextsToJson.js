@@ -4,7 +4,7 @@ const { parseStringPromise } = require('xml2js');
 
 async function convertXmlToJson(xmlFilePath, jsonFilePath) {
   try {
-    const xml = await readFile(xmlFilePath, 'utf8');
+    const xml = await readFile(xmlFilePath, 'utf8').trim();
     const result = await parseStringPromise(xml);
     await writeFile(jsonFilePath, JSON.stringify(result, null, 2), 'utf8');
     console.log(`Converted ${xmlFilePath} to JSON.`);
