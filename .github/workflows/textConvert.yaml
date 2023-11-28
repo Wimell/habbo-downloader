@@ -14,7 +14,7 @@ jobs:
 
       # Convert XML to JSON
       - name: Convert ExternalTexts XML to JSON
-        run: node ./scripts/convertXmlToJson.js
+        run: node ./scripts/externalTextsToJson.js
 
       # commit
       - uses: EndBug/add-and-commit@v7
