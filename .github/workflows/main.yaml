@@ -14,14 +14,6 @@ jobs:
       - name: Install dependencies
         run: npm i
 
-      # gamedata
-      - name: Download Gamedata Files
-        run: node src/index.js -c gamedata
-
-      # Convert XML to JSON
-      - name: Convert ExternalTexts XML to JSON
-        run: node ./scripts/convertXmlToJson.js
-
       # articles
       - name: Download News Article Images
         run: node src/index.js -c articles
@@ -50,7 +42,9 @@ jobs:
       - name: Download Furnitures
         run: node src/index.js -c furnitures
 
-
+      # gamedata
+      - name: Download Gamedata Files
+        run: node src/index.js -c gamedata
 
       # gordon
       - name: Download Gordon Files
