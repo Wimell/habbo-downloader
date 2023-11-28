@@ -14,7 +14,15 @@ jobs:
 
       # Convert XML to JSON
       - name: Convert ExternalTexts XML to JSON
-        run: node ./scripts/externalTextsToJson.js ./resource/gamedata/external_flash_texts.txt ./resource/gamedata/ExternalTexts.json
+        run: |
+        git clone https://github.com/billsonnn/nitro-converter.git ./bundler
+        cd ./bundler
+        yarn install
+        yarn build
+        cp ../scripts/configuration.json /configuration.json
+        yarn start
+        mv /assets ../
+             
 
       # commit
       - uses: EndBug/add-and-commit@v7
