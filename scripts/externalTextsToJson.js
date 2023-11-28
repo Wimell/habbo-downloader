@@ -19,14 +19,15 @@ for (let i = 0; i < lines.length; i++) {
     continue; // Skip these lines
   }
 
-  // Split the line into key and value
-  const [key, value] = line.split('=');
+  const [key, ...value] = line.split('=');
 
   // Remove any leading numbers and characters from the key
   const cleanedKey = key.replace(/^\d+[a-zA-Z_\.]+/, '');
 
-  // Assign the value to the cleaned key in the JSON object
-  jsonObject[cleanedKey] = value;
+  // Join the value using '=' to handle values with '=' within them
+  const cleanedValue = value.join('=');
+
+  jsonObject[cleanedKey] = cleanedValue;
 }
 
 // Convert the JSON object to a JSON string
