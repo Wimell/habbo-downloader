@@ -1,40 +1,41 @@
 const fs = require('fs');
+const path = require('path');
+const process = require('process');
 
-// Read the input text file
-const inputFile = './resource/gamedata/external_flash_texts.txt';
-const textData = fs.readFileSync(inputFile, 'utf8');
-
-// Split the text into lines
-const lines = textData.split('\n');
-
-// Initialize variables to store the JSON object
-let jsonObject = {};
-
-// Process each line of the text
-for (let i = 0; i < lines.length; i++) {
-  const line = lines[i].trim();
-
-  // Check if the line starts with "START" or "END"
-  if (line.startsWith("START - .txt") || line.startsWith("END - .txt")) {
-    continue; // Skip these lines
-  }
-
-  const [key, ...value] = line.split('=');
-
-  // Remove any leading numbers and characters from the key
-  const cleanedKey = key.replace(/^\d+[a-zA-Z_\.]+/, '');
-
-  // Join the value using '=' to handle values with '=' within them
-  const cleanedValue = value.join('=');
-
-  jsonObject[cleanedKey] = cleanedValue;
+async function convertTxtToJson(inputFilePath, outputFilePath) {
+    try {
+        const content = await fs.promises.readFile(inputFilePath, 'utf8');
+        const jsonOutput = mapTextToJSON(content);
+        await fs.promises.writeFile(outputFilePath, JSON.stringify(jsonOutput, null, 2), 'utf8');
+        console.log(`Conversion successful. JSON saved to ${outputFilePath}`);
+    } catch (error) {
+        console.error('Error during conversion:', error);
+    }
 }
 
-// Convert the JSON object to a JSON string
-const jsonString = JSON.stringify(jsonObject, null, 2);
+function mapTextToJSON(text) {
+    if (!text) return {};
 
-// Write the JSON string to an output file
-const outputFile = './resource/gamedata/ExternalTexts.json';
-fs.writeFileSync(outputFile, jsonString);
+    const output = {};
+    const lines = text.split(/\r?\n/);
 
-console.log(`Conversion completed. JSON data saved to ${outputFile}`);
+    for (const line of lines) {
+        const [key, ...valueParts] = line.split('=');
+        if (key) {
+            output[key] = valueParts.join('=');
+        }
+    }
+
+    return output;
+}
+
+// Main execution
+if (process.argv.length !== 4) {
+    console.log('Usage: node convertTxtToJson.js <inputFilePath> <outputFilePath>');
+    process.exit(1);
+}
+
+const inputFilePath = path.resolve(process.argv[2]);
+const outputFilePath = path.resolve(process.argv[3]);
+
+convertTxtToJson(inputFilePath, outputFilePath);
