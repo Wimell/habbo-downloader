@@ -12,17 +12,12 @@ jobs:
       - name: Install dependencies
         run: npm i
 
-      # Convert XML to JSON
-      - name: Convert ExternalTexts XML to JSON
+      - name: Run Bundler
         run: |
-        git clone https://github.com/billsonnn/nitro-converter.git ./bundler
-        cd ./bundler
-        yarn install
-        yarn build
-        cp ../scripts/configuration.json /configuration.json
-        yarn start
-        mv /assets ../
-             
+          cd ./bundler
+          yarn install
+          yarn build
+          yarn start
 
       # commit
       - uses: EndBug/add-and-commit@v7
