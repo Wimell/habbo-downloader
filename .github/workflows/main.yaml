@@ -20,7 +20,7 @@ jobs:
 
       # Convert XML to JSON
       - name: Convert ExternalTexts XML to JSON
-        run: node convertXmlToJson.js
+        run: node ./scripts/convertXmlToJson.js
 
       # articles
       - name: Download News Article Images
