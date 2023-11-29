@@ -1,0 +1,27 @@
+name: Deploy to Cloudflare R2
+
+on:
+  workflow_run:
+    workflows: ["Convert Habbo Files"]
+    types: 
+      - completed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up AWS CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install awscli -y
+          aws configure set aws_access_key_id ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+          aws configure set aws_secret_access_key ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+          aws configure set default.region auto  # Set your region
+
+      - name: Upload assets to Cloudflare R2
+        run: |
+          aws s3 sync ./resource s3://ducket --endpoint-url=https://8dc53ed9e1ee65cb21e45e0c26f07fed.r2.cloudflarestorage.com
