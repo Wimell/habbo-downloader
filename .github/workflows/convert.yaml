@@ -19,7 +19,7 @@ jobs:
       # Start a simple HTTP server for static files
       - name: Start HTTP Server
         run: |
-          nohup npx http-server ./resource -p 8000 &
+          nohup npx http-server ./ -p 8000 &
           sleep 5 # Wait for the server to initialize
 
       - name: Run Bundler
