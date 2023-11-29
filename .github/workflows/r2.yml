@@ -5,6 +5,7 @@ on:
     workflows: ["Convert Habbo Files"]
     types: 
       - completed
+  workflow_dispatch:
 
 jobs:
   deploy:
