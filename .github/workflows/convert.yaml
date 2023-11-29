@@ -1,0 +1,36 @@
+name: Convert Habbo Files
+on:
+  workflow_run:
+    workflows: ["Download Habbo Files"]
+    types: 
+      - completed
+  workflow_dispatch:
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - name: Install dependencies
+        run: npm install
+
+      # Start a simple HTTP server for static files
+      - name: Start HTTP Server
+        run: |
+          nohup npx http-server ./resource -p 8000 &
+          sleep 5 # Wait for the server to initialize
+
+      - name: Run Bundler
+        run: |
+          cd ./bundler
+          yarn install
+          yarn build
+          yarn start
+
+      # Commit changes
+      - uses: EndBug/add-and-commit@v7
+        with:
+          default_author: github_actions
+          add: resource
