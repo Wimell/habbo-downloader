@@ -31,7 +31,7 @@ export class ConverterUtilities
             const now = Date.now();
             const spinner = ora(`Preparing ${ downloadType }`).start();
             const downloadBase = this.getDownloadBaseUrl(downloadType);
-            const saveDirectory = await FileUtilities.getDirectory(`./assets/bundled/${ downloadType }`);
+            const saveDirectory = await FileUtilities.getDirectory(`../resource/bundled/${ downloadType }`);
             const classNamesWithRevisions = await this.getClassNamesWithRevision(downloadType, floorOnly, wallOnly);
             const classNames = Object.keys(classNamesWithRevisions);
 
@@ -184,7 +184,7 @@ export class ConverterUtilities
         const now = Date.now();
         const spinner = ora('Preparing SWF Extraction').start();
         const swfBaseDirectory = await FileUtilities.getDirectory('./assets/swf');
-        const bundledBaseDirectory = await FileUtilities.getDirectory('./assets/bundled');
+        const bundledBaseDirectory = await FileUtilities.getDirectory('../resource/bundled');
 
         for await (const type of ConverterUtilities.BUNDLE_TYPES)
         {
@@ -246,7 +246,7 @@ export class ConverterUtilities
         const now = Date.now();
         const spinner = ora('Preparing Bundler').start();
         const bundleBaseDirectory = await FileUtilities.getDirectory('./assets/extracted');
-        const bundledBaseDirectory = await FileUtilities.getDirectory('./assets/bundled');
+        const bundledBaseDirectory = await FileUtilities.getDirectory('../resource/bundled');
 
         for await (const type of ConverterUtilities.BUNDLE_TYPES)
         {

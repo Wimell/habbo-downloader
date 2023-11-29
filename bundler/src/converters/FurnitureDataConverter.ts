@@ -22,7 +22,7 @@ export class FurnitureDataConverter implements IConverter
 
         this.furnitureData = ((!content.startsWith('{')) ? await this.mapXML2JSON(await parseStringPromise(content.replace(/&/g,'&amp;'))) : JSON.parse(content));
 
-        const directory = await FileUtilities.getDirectory('./assets/gamedata');
+        const directory = await FileUtilities.getDirectory('../resource/gamedata');
         const path = directory.path + '/FurnitureData.json';
 
         await writeFile(path, JSON.stringify(this.furnitureData), 'utf8');

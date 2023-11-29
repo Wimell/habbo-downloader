@@ -22,7 +22,7 @@ export class FigureDataConverter implements IConverter
 
         this.figureData = ((!content.startsWith('{')) ? await this.mapXML2JSON(await parseStringPromise(content.replace(/&/g,'&amp;'))) : JSON.parse(content));
 
-        const directory = await FileUtilities.getDirectory('./assets/gamedata');
+        const directory = await FileUtilities.getDirectory('../resource/gamedata');
         const path = directory.path + '/FigureData.json';
 
         await writeFile(path, JSON.stringify(this.figureData), 'utf8');

@@ -21,7 +21,7 @@ export class ProductDataConverter implements IConverter
 
         this.productData = ((!content.startsWith('{')) ? await this.mapText2JSON(content) : JSON.parse(content));
 
-        const directory = await FileUtilities.getDirectory('./assets/gamedata');
+        const directory = await FileUtilities.getDirectory('../resource/gamedata');
         const path = directory.path + '/ProductData.json';
 
         await writeFile(path, JSON.stringify(this.productData), 'utf8');

@@ -21,7 +21,7 @@ export class ExternalTextsConverter implements IConverter
 
         this.externalTexts = ((!content.startsWith('{')) ? await this.mapText2JSON(content) : JSON.parse(content));
 
-        const directory = await FileUtilities.getDirectory('./assets/gamedata');
+        const directory = await FileUtilities.getDirectory('../resource/gamedata');
         const path = directory.path + '/ExternalTexts.json';
 
         await writeFile(path, JSON.stringify(this.externalTexts), 'utf8');
