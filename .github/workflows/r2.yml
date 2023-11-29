@@ -11,6 +11,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    strategy:
+      fail-fast: false
+      matrix:
+        folder: [bundled, dcr, gordon, images, c_images, gamedata, habbo-web-articles]
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
@@ -25,4 +30,5 @@ jobs:
 
       - name: Upload assets to Cloudflare R2
         run: |
-          aws s3 sync ./resource s3://ducket --endpoint-url=https://8dc53ed9e1ee65cb21e45e0c26f07fed.r2.cloudflarestorage.com
+          aws s3 sync ./resource/${{ matrix.folder }} s3://ducket/${{ matrix.folder }} --endpoint-url=https://8dc53ed9e1ee65cb21e45e0c26f07fed.r2.cloudflarestorage.com --size-only
+
