@@ -1,0 +1,43 @@
+name: Download Habbo Files
+on:
+  schedule:
+    - cron: '0 */3 * * *'
+  workflow_dispatch:
+    
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - name: Install dependencies
+        run: npm i
+        working-directory: ./atlas_loader
+
+      - name: Cache Node.js modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Run Node command
+        run: |
+          npx shroom dump --url https://habbo.com/gamedata/external_variables/d7a0ae8cf0e0c49a20ed821d63f733c91e0948d9 --location ./temp
+        working-directory: ./atlas_loader
+
+      - name: Compile Sprites
+        run: |
+          npm ci
+          npm run start
+          rm -rf ./temp
+        working-directory: ./atlas_loader
+   
+      # commit
+      - uses: EndBug/add-and-commit@v7
+        with:
+          default_author: github_actions
+          add: resource
