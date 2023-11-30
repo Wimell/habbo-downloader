@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        folder: [bundled, dcr, gordon, images, c_images, gamedata, habbo-web-articles]
+        folder: [bundled, dcr, gordon, images, c_images, gamedata, habbo-web-articles, sprites]
 
     steps:
       - name: Check out repository

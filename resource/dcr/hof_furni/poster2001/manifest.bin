@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<manifest>
+   <library name="poster2001" version="0.1">
+      <assets>
+         <asset name="index" mimeType="text/xml"/>
+         <asset name="poster2001_visualization" mimeType="text/xml"/>
+         <asset name="poster2001_assets" mimeType="text/xml"/>
+         <asset name="poster2001_logic" mimeType="text/xml"/>
+         <asset name="poster2001_64_a_2_0" mimeType="image/png"/>
+         <asset name="poster2001_icon_a" mimeType="image/png"/>
+         <asset name="poster2001_32_a_2_0" mimeType="image/png"/>
+      </assets>
+   </library>
+</manifest> 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<manifest>
+   <library name="poster502" version="0.1">
+      <assets>
+         <asset name="index" mimeType="text/xml"/>
+         <asset name="poster502_visualization" mimeType="text/xml"/>
+         <asset name="poster502_assets" mimeType="text/xml"/>
+         <asset name="poster502_logic" mimeType="text/xml"/>
+         <asset name="poster502_64_a_2_0" mimeType="image/png"/>
+         <asset name="poster502_icon_a" mimeType="image/png"/>
+         <asset name="poster502_64_a_4_0" mimeType="image/png"/>
+         <asset name="poster502_32_a_2_0" mimeType="image/png"/>
+         <asset name="poster502_32_a_4_0" mimeType="image/png"/>
+      </assets>
+   </library>
+</manifest> 

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<assets>
+   <asset name="poster517_64_a_2_0" x="25" y="34"/>
+   <asset name="poster517_icon_a" x="10" y="15"/>
+   <asset name="poster517_64_a_4_0" flipH="1" source="poster517_64_a_2_0" x="25" y="34"/>
+   <asset name="poster517_32_a_2_0" x="13" y="17"/>
+   <asset name="poster517_32_a_4_0" flipH="1" source="poster517_32_a_2_0" x="13" y="17"/>
+</assets>

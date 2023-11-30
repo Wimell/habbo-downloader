@@ -9,7 +9,7 @@ import readline from "readline";
 export class FurnitureTask {
 
     private _fileQueue: string[] = [];
-    private _rootDirectory: string = '../temp/hof_furni/';
+    private _rootDirectory: string = '../resource/dcr/hof_furni/';
 
     public initialise(): Promise<void> {
         console.log("Initialising FurnitureTask...");
@@ -59,6 +59,12 @@ export class FurnitureTask {
             const assetName: string = path.basename(filePath, path.extname(filePath));
             const directoryPath: string = path.dirname(filePath);
 
+            //if ../resource/sprites/assetName/assetName.png exists, skip
+            if (fs.existsSync(path.join('../resource/sprites/', assetName, assetName + ".png"))) {
+                console.log("Skipping " + assetName + " because it already exists.");
+                continue;
+            }
+
             try {
                 fileCount += 1;
 
@@ -72,7 +78,7 @@ export class FurnitureTask {
         
 
                 // Define destination directory
-                const destDirectory = path.join('../sprites/', assetName);
+                const destDirectory = path.join('../resource/sprites/', assetName);
                 if (!fs.existsSync(destDirectory)) {
                     fs.mkdirSync(destDirectory, { recursive: true });
                 }

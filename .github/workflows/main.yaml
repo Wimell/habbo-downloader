@@ -95,6 +95,18 @@ jobs:
           yarn build
           yarn start
 
+      - name: Extract Spritesheet
+        run: |
+          cd ./atlas_loader
+          npm ci
+          npx shroom dump  --location ../resource/dcr
+
+      - name: Compile Sprites
+        run: |
+          npm ci
+          npm run start
+        working-directory: ./atlas_loader
+
       # commit
       - uses: EndBug/add-and-commit@v7
         with:
