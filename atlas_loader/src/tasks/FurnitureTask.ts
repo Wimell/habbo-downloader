@@ -44,8 +44,6 @@ export class FurnitureTask {
                 this.recursiveFileRead(filePath);
             } else if (path.extname(file) === ".swf") {
                 this._fileQueue.push(filePath);
-            } else {
-                console.log("\x1b[0m", ">>", "\x1b[31m", `Ignoring ${file}, it's not a .swf file.`, "\x1b[0m");
             }
         });
     }
@@ -61,19 +59,13 @@ export class FurnitureTask {
 
             //if ../resource/sprites/assetName/assetName.png exists, skip
             if (fs.existsSync(path.join('../resource/sprites/', assetName, assetName + ".png"))) {
-                console.log("Skipping " + assetName + " because it already exists.");
                 continue;
             }
 
             try {
                 fileCount += 1;
-
-                console.log("SpritesheetBuilder: Building " + assetName + "...")
-                await new SpritesheetBuilder().build(assetName,directoryPath);
-                console.log("OffsetBuilder: Building " + assetName + "...")
+                await new SpritesheetBuilder().build(assetName,directoryPath);    
                 await new OffsetBuilder().buildFurnitureOffset(assetName, directoryPath);
-                console.log("VisualizationBuilder: Building " + assetName + "...")
-                console.log("Processed " + fileCount + "/" + this._fileQueue.length + " " + assetName);
                 if(!await new VisualizationBuilder().buildFurnitureVisualization(assetName,directoryPath)) continue;
         
 
@@ -88,15 +80,11 @@ export class FurnitureTask {
                 const jsonFile = path.join(directoryPath, assetName,assetName + ".json");
 
                 if (fs.existsSync(pngFile)) {
-                    console.log("Moving " + pngFile + " to " + path.join(destDirectory, assetName,assetName + ".png"));
                     fs.renameSync(pngFile, path.join(destDirectory,assetName + ".png"));
                 }
                 if (fs.existsSync(jsonFile)) {
-                    console.log("Moving " + jsonFile + " to " + path.join(destDirectory, assetName,assetName + ".json"));
                     fs.renameSync(jsonFile, path.join(destDirectory,assetName + ".json"));
                 }
-
-                console.log("Moved files for " + assetName);
 
 
                 console.log("Cleanup " + assetName + "...");
