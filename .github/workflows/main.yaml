@@ -14,6 +14,14 @@ jobs:
       - name: Install dependencies
         run: npm i
 
+      - name: Cache Node.js modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       # articles
       - name: Download News Article Images
         run: node src/index.js -c articles
@@ -73,6 +81,19 @@ jobs:
       # promo
       - name: Download Web Promo Images
         run: node src/index.js -c promo
+
+      # Start a simple HTTP server for static files
+      - name: Start HTTP Server
+        run: |
+          nohup npx http-server ./ -p 8083 &
+          sleep 5 # Wait for the server to initialize
+
+      - name: Run Bundler
+        run: |
+          cd ./bundler
+          yarn install
+          yarn build
+          yarn start
 
       # commit
       - uses: EndBug/add-and-commit@v7
