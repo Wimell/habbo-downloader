@@ -98,12 +98,12 @@ jobs:
       - name: Extract Spritesheet
         run: |
           cd ./atlas_loader
-          npm ci
+          npm i
           npx shroom dump  --location ../resource/dcr
 
       - name: Compile Sprites
         run: |
-          npm ci
+          npm i
           npm run start
         working-directory: ./atlas_loader
 
