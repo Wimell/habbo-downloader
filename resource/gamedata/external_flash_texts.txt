@@ -22610,6 +22610,7 @@ featured.offer.xmas23baking1.title=Simple Baking Set
 featured.offer.xmas23baking1b.title=Simple Baking Ingredients
 featured.offer.xmas23baking2.title=Expert Baking Set
 featured.offer.xmas23baking2b.title=Expert Baking Ingredients
+featured.offer.xmas23cocoabundle.title=NEW: Cocoa Wonderland Collection Bundle
 featured.offer.xmas23craft.title=Chocolate Crafting Table
 featured.offer.xmas23furni.title=NEW: Chocolate Emporium Furni
 featured.offer.xmas23r1.title=RARE Candyfloss Tree
