@@ -21286,7 +21286,7 @@ collectibles.claiming.failed=Claiming failed, try again.
 collectibles.claiming.success=Reward claimed!
 collectibles.collections.title=Collection
 collectibles.high_score=All-time highest XP:
-collectibles.info.description=The Collectors Guild is a hub that collectors can use to view and manage their Collector XP, collectibles and Relics.For more information about the features contained within the guild, <a href="https://help.habbo.com/hc/en-us/sections/15690953049362-
+collectibles.info.description=The Collectors Guild is a hub that collectors can use to view and manage their Collector XP, collectibles and Relics. For more information about the features contained within the guild, <a href="https://help.habbo.com/hc/en-us/sections/15690953049362-Habbo-Collectibles">check this page</a>.
 collectibles.info.title=Info
 collectibles.item.rarity=Rarity
 collectibles.item.type=Type
