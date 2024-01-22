@@ -6,6 +6,7 @@ on:
 jobs:
   main:
     runs-on: ubuntu-latest
+    timeout-minutes: 480
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -100,6 +101,11 @@ jobs:
           cd ./atlas_loader
           npm i
           npx shroom dump  --location ../resource/dcr
+
+      - name: Set Swap Space
+        uses: pierotofy/set-swap-space@master
+        with:
+          swap-size-gb: 10
 
       - name: Compile Sprites
         run: |
